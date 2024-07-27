@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFrameworkCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240314075958_UpdateBarcode_ForProduct")]
-    partial class UpdateBarcode_ForProduct
+    [Migration("20240727183714_Category_id")]
+    partial class Category_id
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -33,6 +50,9 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Barcode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -47,7 +67,25 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Category_Id");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Product", b =>
+                {
+                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("Category_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
