@@ -21,7 +21,7 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", b =>
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,10 +35,10 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Product", b =>
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,43 +46,43 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Barcode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Category_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Category_Id");
-
-                    b.ToTable("Products");
+                    b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Product", b =>
+            modelBuilder.Entity("StudentTeacher", b =>
                 {
-                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("Category_Id")
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeachersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentsId", "TeachersId");
+
+                    b.HasIndex("TeachersId");
+
+                    b.ToTable("StudentTeacher");
+                });
+
+            modelBuilder.Entity("StudentTeacher", b =>
+                {
+                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Category", b =>
-                {
-                    b.Navigation("Products");
+                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Teacher", null)
+                        .WithMany()
+                        .HasForeignKey("TeachersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
