@@ -15,10 +15,6 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Nesne örneği alsın , conf dosyası hazır hale gelir connection string okunur. 
-
-            // Bunları sadece console uyg yapıyoruz. Web vs zaten hazır geliyor
-
             Initializer.Build();
 
             optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("SqlConnection"));
