@@ -10,16 +10,28 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    _context.Products.Add(new Product { Name="Kalem 1",Price=50,Stock=150,Barcode=123456789});
+    var product = _context.Products.First();
 
-    _context.Products.Add(new Product { Name = "Kalem 2", Price = 50, Stock = 150, Barcode = 123456788 });
+    product.Name = "Test";
+    product.Price = 10;
 
-    _context.Products.Add(new Product { Name = "Kalem 3", Price = 50, Stock = 150, Barcode = 123456787 });
+    // Track edilmiş bir datada bir propda değişiklik yaptın 
+    // Ef direkt statei modify'a çekiyor
+    // update metotunu çağırmana gerek yok.
 
-    // Loglamalarda kullanabılır. Birden fazla database kullanabiliriz. DbContext'in idsini verir
-    Console.WriteLine($"ContextId : {_context.ContextId}");
-
+    // _context.Update(product); 
     _context.SaveChanges();
+
+    //_context.Products.Add(new Product { Name="Kalem 1",Price=50,Stock=150,Barcode=123456789});
+
+    //_context.Products.Add(new Product { Name = "Kalem 2", Price = 50, Stock = 150, Barcode = 123456788 });
+
+    //_context.Products.Add(new Product { Name = "Kalem 3", Price = 50, Stock = 150, Barcode = 123456787 });
+
+    //// Loglamalarda kullanabılır. Birden fazla database kullanabiliriz. DbContext'in idsini verir
+    //Console.WriteLine($"ContextId : {_context.ContextId}");
+
+    //_context.SaveChanges();
 
     // AsNoTracking() -> Gelen datalar ef core tarafından track edilmesin ! Memoryde tutulmaz.
 
