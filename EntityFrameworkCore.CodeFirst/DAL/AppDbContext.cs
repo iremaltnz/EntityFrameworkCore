@@ -38,5 +38,12 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 
             return base.SaveChanges();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Fluent API
+            modelBuilder.Entity<Product>().ToTable("ProductTbb","productstbb");
+            base.OnModelCreating(modelBuilder); 
+        }
     }
 }

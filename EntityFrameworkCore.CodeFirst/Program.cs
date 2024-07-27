@@ -10,17 +10,32 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    var product = _context.Products.First();
 
-    product.Name = "Test";
-    product.Price = 10;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //var product = _context.Products.First();
+
+    //product.Name = "Test";
+    //product.Price = 10;
 
     // Track edilmiş bir datada bir propda değişiklik yaptın 
     // Ef direkt statei modify'a çekiyor
     // update metotunu çağırmana gerek yok.
 
     // _context.Update(product); 
-    _context.SaveChanges();
+    //_context.SaveChanges();
 
     //_context.Products.Add(new Product { Name="Kalem 1",Price=50,Stock=150,Barcode=123456789});
 
