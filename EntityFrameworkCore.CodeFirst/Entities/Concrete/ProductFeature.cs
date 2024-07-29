@@ -16,7 +16,7 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
         public int Height { get; set; }
         public string Color { get; set; }
 
-        public int ProductRef_Id { get; set; }
+        public int ProductId { get; set; }
 
         //[ForeignKey("ProductRef_Id")]
         public Product Product { get; set; }

@@ -27,10 +27,10 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
 
         // Ef bunu otomatik foreign key olarak anlayabiliyor ->CategoryId
         // Farklı bi isim istermsem tanımlamam lazım FluentAPI , Data An.
-        // public int Category_Id { get; set; }
+        public int CategoryId { get; set; }
 
         //Navigation property
         //[ForeignKey("Category_Id")]
-        //public Category Category { get; set; }
+        public Category Category { get; set; }
     }
 }

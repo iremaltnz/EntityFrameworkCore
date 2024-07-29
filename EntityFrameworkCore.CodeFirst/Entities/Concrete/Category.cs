@@ -11,6 +11,7 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //public List<Product> Products { get; set; }
+        // null exception almamak içim newledik
+        public List<Product> Products { get; set; } = new List<Product>();
     }
 }

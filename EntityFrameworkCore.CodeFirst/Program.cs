@@ -9,11 +9,41 @@ Initializer.Build();
 
 using (var _context = new AppDbContext())
 {
+    // one-to-many
+
+    //var category = new Category { Name = "Kalem" };
+
+    //var product = new Product { Name = "Kurşun Kalem", Price = 40, Stock = 20, Barcode = 111, Category = category };
+
+    //_context.Products.Add(product);
+
+    //category.Products.Add(new Product { Name = "Pilot Kalem", Price = 700, Stock = 30, Barcode = 214 });
+
+    //_context.Add(category);
 
 
+    // one-to-one 
+    //product tablosunda olup pf tablosunda data aolmayabilir ama tam tersi olamaz !!
+    //var category = new Category { Name = "Silgi" };
+    //var product = new Product { Name = "Kokulu Silgi", Price = 200, Stock = 10, Barcode = 175,CategoryId=3, ProductFeature=new() {Color="Pembe",Height=100,Width=100 } };
 
 
+    //_context.Products.Add(product);
 
+    //many-to-many
+    //var student=new Student() { Name="İrem"};
+
+    //student.Teachers.Add(new Teacher() { Name = "Şeyda" });
+    //student.Teachers.Add(new Teacher() { Name = "Kemal" });
+
+    var teacher = new Teacher() {Name="Anıl" ,Students=new List<Student>() 
+    {
+      new Student(){Name="Lale"},
+      new Student(){Name="Samet"}
+    } };
+
+    _context.Add(teacher);
+    _context.SaveChanges();
 
 
 
