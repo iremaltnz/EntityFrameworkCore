@@ -9,7 +9,11 @@ Initializer.Build();
 
 using (var _context = new AppDbContext())
 {
+    _context.Persons.Add(new Manager { FirstName="İrem",LastName="Altınöz",Age=23,Grade=1});
 
+    _context.Persons.Add(new Employee { FirstName = "Ahmet", LastName = "Altınöz", Age = 19, Salary = 1000 });
+
+    _context.SaveChanges();
     // Eager Loading
     // id=3 olan category ve ona bağlı productlar
 
@@ -45,13 +49,13 @@ using (var _context = new AppDbContext())
 
     // Lazy Loading
 
-    var category=await _context.Categories.FirstAsync();
+    //var category=await _context.Categories.FirstAsync();
 
-    Console.WriteLine("Category çekildi");
+    //Console.WriteLine("Category çekildi");
 
-    var products = category.Products;
+    //var products = category.Products;
 
-    Console.WriteLine("...");
+    //Console.WriteLine("...");
 
 
 

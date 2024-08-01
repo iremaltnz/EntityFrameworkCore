@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFrameworkCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240727192531_StudentTeacher")]
-    partial class StudentTeacher
+    [Migration("20240801102621_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Student", b =>
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,16 +32,26 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Teacher", b =>
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Manager", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,43 +59,23 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("StudentTeacher", b =>
-                {
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeachersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentsId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("StudentTeacher");
-                });
-
-            modelBuilder.Entity("StudentTeacher", b =>
-                {
-                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Managers");
                 });
 #pragma warning restore 612, 618
         }
