@@ -19,7 +19,7 @@ namespace EntityFrameworkCore.CodeFirst.DAL
         //public DbSet<Teacher> Teachers { get; set; }
         //public DbSet<Student> Students { get; set; }
 
-        public DbSet<BasePerson> Persons { get; set; }
+        //public DbSet<BasePerson> Persons { get; set; }
         public DbSet<Manager>  Managers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,9 +38,12 @@ namespace EntityFrameworkCore.CodeFirst.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<BasePerson>().ToTable("Persons");
-            modelBuilder.Entity<Employee>().ToTable("Employees");
-            modelBuilder.Entity<Manager>().ToTable("Managers");
+            //modelBuilder.Entity<Manager>().OwnsOne(x=>x.Person);
+            //modelBuilder.Entity<Employee>().OwnsOne(x => x.Person);
+
+            //modelBuilder.Entity<BasePerson>().ToTable("Persons");
+            //modelBuilder.Entity<Employee>().ToTable("Employees");
+            //modelBuilder.Entity<Manager>().ToTable("Managers");
 
             //one-to-many
             //modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.Category_Id);

@@ -9,11 +9,19 @@ Initializer.Build();
 
 using (var _context = new AppDbContext())
 {
-    _context.Persons.Add(new Manager { FirstName="İrem",LastName="Altınöz",Age=23,Grade=1});
 
-    _context.Persons.Add(new Employee { FirstName = "Ahmet", LastName = "Altınöz", Age = 19, Salary = 1000 });
 
-    _context.SaveChanges();
+
+
+
+
+
+
+    //_context.Persons.Add(new Manager { FirstName="İrem",LastName="Altınöz",Age=23,Grade=1});
+
+    //_context.Persons.Add(new Employee { FirstName = "Ahmet", LastName = "Altınöz", Age = 19, Salary = 1000 });
+
+    //_context.SaveChanges();
     // Eager Loading
     // id=3 olan category ve ona bağlı productlar
 

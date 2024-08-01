@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
 {
-    public class Employee:BasePerson
+    public class Employee
     {
+        public int Id { get; set; }
+        public Person Person { get; set; }
         [Precision(18,2)]
         public decimal Salary { get; set; }
     }
