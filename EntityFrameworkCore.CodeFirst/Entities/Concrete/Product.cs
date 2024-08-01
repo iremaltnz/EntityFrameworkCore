@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -20,10 +21,12 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Precision(18,2)]
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public int Barcode { get; set; }
-        public ProductFeature ProductFeature { get; set; }
+        public virtual ProductFeature ProductFeature { get; set; }
 
         // Ef bunu otomatik foreign key olarak anlayabiliyor ->CategoryId
         // Farklı bi isim istermsem tanımlamam lazım FluentAPI , Data An.
@@ -31,6 +34,6 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
 
         //Navigation property
         //[ForeignKey("Category_Id")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCore.CodeFirst.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,20 @@ namespace EntityFrameworkCore.CodeFirst.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
 
-        public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Student> Students { get; set; }
+        //public DbSet<Teacher> Teachers { get; set; }
+        //public DbSet<Student> Students { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             Initializer.Build();
 
-            optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("SqlConnection"));
+            // lazy loading aktif
+            // information ve üstünü logla
+
+            optionsBuilder
+                .LogTo(Console.WriteLine,LogLevel.Information)
+                .UseLazyLoadingProxies()
+                .UseSqlServer(Initializer.Configuration.GetConnectionString("SqlConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

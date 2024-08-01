@@ -136,3 +136,8 @@ C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\obj\Debu
 C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\obj\Debug\net8.0\EntityFrameworkCore.CodeFirst.pdb
 C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\obj\Debug\net8.0\EntityFrameworkCore.CodeFirst.genruntimeconfig.cache
 C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\obj\Debug\net8.0\ref\EntityFrameworkCore.CodeFirst.dll
+C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\irema\Github\EntityFrameworkCore\EntityFrameworkCore.CodeFirst\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll

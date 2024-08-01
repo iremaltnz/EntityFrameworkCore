@@ -12,6 +12,6 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
         public string Name { get; set; }
 
         // null exception almamak içim newledik
-        public List<Product> Products { get; set; } = new List<Product>();
+        public virtual List<Product> Products { get; set; } = new List<Product>();
     }
 }

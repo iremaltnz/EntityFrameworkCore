@@ -19,6 +19,6 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
         public int ProductId { get; set; }
 
         //[ForeignKey("ProductRef_Id")]
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

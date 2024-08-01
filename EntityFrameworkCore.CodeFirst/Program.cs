@@ -9,6 +9,55 @@ Initializer.Build();
 
 using (var _context = new AppDbContext())
 {
+
+    // Eager Loading
+    // id=3 olan category ve ona bağlı productlar
+
+    //var categorWithProduct = _context.Categories
+    //    .Include(x => x.Products)
+    //    .Where(x => x.Id == 3);
+
+    // id=3 olan category ve ona bağlı productlar ve productfeatures bilgisi
+
+    //var categorWithProductProductFeatures = _context.Categories
+    //.Include(x => x.Products)
+    //.ThenInclude(x=>x.ProductFeature)
+    //.Where(x => x.Id == 3);
+
+    //Explict Loading
+
+    //var category=_context.Categories.FirstOrDefault();
+
+    //if (category != null)
+    //{
+    //    _context.Entry(category)
+    //       .Collection(x => x.Products)
+    //       .Load();
+    //}
+
+    //var product=_context.Products.FirstOrDefault();
+    //if (product != null) 
+    //{ 
+    //    _context.Entry(product)
+    //        .Reference(x=>x.ProductFeature)
+    //        .Load();
+    //}
+
+    // Lazy Loading
+
+    var category=await _context.Categories.FirstAsync();
+
+    Console.WriteLine("Category çekildi");
+
+    var products = category.Products;
+
+    Console.WriteLine("...");
+
+
+
+
+
+
     // one-to-many
 
     //var category = new Category { Name = "Kalem" };
@@ -36,14 +85,14 @@ using (var _context = new AppDbContext())
     //student.Teachers.Add(new Teacher() { Name = "Şeyda" });
     //student.Teachers.Add(new Teacher() { Name = "Kemal" });
 
-    var teacher = new Teacher() {Name="Anıl" ,Students=new List<Student>() 
-    {
-      new Student(){Name="Lale"},
-      new Student(){Name="Samet"}
-    } };
+    //var teacher = new Teacher() {Name="Anıl" ,Students=new List<Student>() 
+    //{
+    //  new Student(){Name="Lale"},
+    //  new Student(){Name="Samet"}
+    //} };
 
-    _context.Add(teacher);
-    _context.SaveChanges();
+    //_context.Add(teacher);
+    //_context.SaveChanges();
 
 
 
