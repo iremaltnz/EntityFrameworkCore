@@ -37,6 +37,11 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<BasePerson>().ToTable("Persons");
+            modelBuilder.Entity<Employee>().ToTable("Employees");
+            modelBuilder.Entity<Manager>().ToTable("Managers");
+
             //one-to-many
             //modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.Category_Id);
 

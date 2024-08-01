@@ -32,11 +32,6 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,21 +42,20 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Persons", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BasePerson");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Employee", b =>
                 {
                     b.HasBaseType("EntityFrameworkCore.CodeFirst.Entities.Concrete.BasePerson");
 
-                    b.Property<int>("Salary")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Salary")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasDiscriminator().HasValue("Employee");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Manager", b =>
@@ -71,7 +65,25 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("Manager");
+                    b.ToTable("Managers", (string)null);
+                });
+
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Employee", b =>
+                {
+                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.BasePerson", null)
+                        .WithOne()
+                        .HasForeignKey("EntityFrameworkCore.CodeFirst.Entities.Concrete.Employee", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.Manager", b =>
+                {
+                    b.HasOne("EntityFrameworkCore.CodeFirst.Entities.Concrete.BasePerson", null)
+                        .WithOne()
+                        .HasForeignKey("EntityFrameworkCore.CodeFirst.Entities.Concrete.Manager", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

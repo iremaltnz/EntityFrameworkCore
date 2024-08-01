@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
 {
     public class Employee:BasePerson
     {
-        public int Salary { get; set; }
+        [Precision(18,2)]
+        public decimal Salary { get; set; }
     }
 }
