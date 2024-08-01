@@ -12,16 +12,17 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 {
     public class AppDbContext:DbContext
     {
-        //public DbSet<Product> Products { get; set; }
-        //public DbSet<Category> Categories { get; set; }
-        //public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<ProductFull> ProductFulls { get; set; }
 
         //public DbSet<Teacher> Teachers { get; set; }
         //public DbSet<Student> Students { get; set; }
 
         //public DbSet<BasePerson> Persons { get; set; }
-        public DbSet<Manager>  Managers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<Manager>  Managers { get; set; }
+        //public DbSet<Employee> Employees { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             Initializer.Build();
@@ -37,6 +38,8 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //modelBuilder.Entity<ProductFull>().HasNoKey();
 
             //modelBuilder.Entity<Manager>().OwnsOne(x=>x.Person);
             //modelBuilder.Entity<Employee>().OwnsOne(x => x.Person);
