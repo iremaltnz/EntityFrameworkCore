@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFrameworkCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240801203633_ProductCategoryProductFeaturesadd")]
-    partial class ProductCategoryProductFeaturesadd
+    [Migration("20240802090011_PriceDiscountCheck")]
+    partial class PriceDiscountCheck
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,13 +55,17 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("DiscountPrice")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -70,7 +74,12 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.HasIndex("Name");
+
+                    b.ToTable("Products", t =>
+                        {
+                            t.HasCheckConstraint("PriceDiscountCheck", "[Price]>[DiscountPrice]");
+                        });
                 });
 
             modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.ProductFeature", b =>

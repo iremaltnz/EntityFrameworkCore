@@ -3,6 +3,7 @@ using EntityFrameworkCore.CodeFirst.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFrameworkCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240802081037_NameIndex")]
+    partial class NameIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,17 +55,13 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DiscountPrice")
-                        .HasPrecision(9, 2)
-                        .HasColumnType("decimal(9,2)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(9, 2)
-                        .HasColumnType("decimal(9,2)");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -73,10 +72,7 @@ namespace EntityFrameworkCore.CodeFirst.Migrations
 
                     b.HasIndex("Name");
 
-                    b.ToTable("Products", t =>
-                        {
-                            t.HasCheckConstraint("PriceDiscountCheck", "[Price]>[DiscountPrice]");
-                        });
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("EntityFrameworkCore.CodeFirst.Entities.Concrete.ProductFeature", b =>

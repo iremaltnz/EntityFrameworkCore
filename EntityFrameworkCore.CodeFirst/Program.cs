@@ -10,7 +10,7 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    var productFull = _context.ProductFulls.FromSqlRaw(@"select p.Id 'Product_Id',c.Name 'CategoryName' pf.Height from Products p join productFeatures pf on p.Id=pf.Id join Categories c on p.CategoryId=c.Id");
+    //var productFull = _context.ProductFulls.FromSqlRaw(@"select p.Id 'Product_Id',c.Name 'CategoryName' pf.Height from Products p join productFeatures pf on p.Id=pf.Id join Categories c on p.CategoryId=c.Id");
 
 
 

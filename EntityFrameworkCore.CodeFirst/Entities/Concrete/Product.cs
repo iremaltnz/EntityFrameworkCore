@@ -17,13 +17,21 @@ namespace EntityFrameworkCore.CodeFirst.Entities.Concrete
     // Tablo adı ve sema alttaki gibi değişir.
     // Data Annotations
     // [Table("ProductTb",Schema ="products")]
+
+    //[Index(nameof(Name), nameof(Price))] // composite index ilk yazılan kolon daha hızlı çalışıyor
+    [Index(nameof(Name))]
+   // [Index(nameof(Price))]
     public class Product
     {
+        //pk lara sql server tarafından clustered index atar
+        //fk lara da otomatik atanır
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [Precision(18,2)]
+        [Precision(9,2)]
         public decimal Price { get; set; }
+        [Precision(9,2)]
+        public decimal DiscountPrice { get; set; }
         public int Stock { get; set; }
         public int Barcode { get; set; }
         public virtual ProductFeature ProductFeature { get; set; }

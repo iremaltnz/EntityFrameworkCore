@@ -15,7 +15,7 @@ namespace EntityFrameworkCore.CodeFirst.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
-        public DbSet<ProductFull> ProductFulls { get; set; }
+        // public DbSet<ProductFull> ProductFulls { get; set; }
 
         //public DbSet<Teacher> Teachers { get; set; }
         //public DbSet<Student> Students { get; set; }
@@ -38,6 +38,12 @@ namespace EntityFrameworkCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>().HasCheckConstraint("PriceDiscountCheck","[Price]>[DiscountPrice]");
+
+            //modelBuilder.Entity<Product>().HasIndex(x=>x.Name);
+            //modelBuilder.Entity<Product>().HasIndex(x => new { x.Name ,x.Price});
+            // modelBuilder.Entity<Product>().HasIndex(x=>x.Name).IncludeProperties(x=> new {x.Price,x.Stock});
+
 
             //modelBuilder.Entity<ProductFull>().HasNoKey();
 
