@@ -10,6 +10,30 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
+    using (var transaction=_context.Database.BeginTransaction())
+    {
+        var category = new Category { Name = "Telefon" };
+
+        _context.Categories.Add(category);
+        _context.SaveChanges();
+
+
+
+        var product = _context.Products.First();
+
+        product.Name = "Defter 123";
+        product.CategoryId = category.Id; // Bu id savechanges çağırılınca oluşur
+
+        // throw new Exception(); Mesela burada bir hata fırladı tüm işlemler artık geri alınacak
+        _context.Products.Add(product);
+        _context.SaveChanges();
+        // savechanges ile iki işlemi aynı anda yollanır hata alırsak rollback
+
+        transaction.Commit();
+    }
+
+
+
     //var productFull = _context.ProductFulls.FromSqlRaw(@"select p.Id 'Product_Id',c.Name 'CategoryName' pf.Height from Products p join productFeatures pf on p.Id=pf.Id join Categories c on p.CategoryId=c.Id");
 
 
