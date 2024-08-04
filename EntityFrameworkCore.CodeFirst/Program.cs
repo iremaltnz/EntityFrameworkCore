@@ -3,11 +3,16 @@
 using EntityFrameworkCore.CodeFirst;
 using EntityFrameworkCore.CodeFirst.DAL;
 using EntityFrameworkCore.CodeFirst.Entities.Concrete;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Configuration;
+using System.Data.Common;
 
 Initializer.Build();
+var connection = new SqlConnection(Initializer.Configuration.GetConnectionString("SqlCon"));
 
-using (var _context = new AppDbContext())
+using (var _context = new AppDbContext(connection))
 {
 
     using (var transaction=_context.Database.BeginTransaction())
@@ -29,8 +34,14 @@ using (var _context = new AppDbContext())
         _context.SaveChanges();
         // savechanges ile iki işlemi aynı anda yollanır hata alırsak rollback
 
+        using (var dbContext2 = new AppDbContext(connection))
+        {
+            dbContext2.Database.UseTransaction(transaction.GetDbTransaction());
+    }
+
         transaction.Commit();
     }
+
 
 
 
